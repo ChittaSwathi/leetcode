@@ -1,0 +1,49 @@
+🃏 Flashcard — LeetCode 452: Min Arrows to Burst Balloons
+
+Problem (plain words):
+You’re given balloons represented by intervals [start, end] on a number line. An arrow shot at x bursts every balloon covering x. Find the minimum number of arrows needed to burst all balloons.
+
+Analogy / Story:
+🎯 Imagine balloons floating at different ranges along a wall. You shoot an arrow straight up at some x coordinate. That arrow pops all balloons covering x. Goal: use as few arrows as possible.
+
+Core Idea (Pattern):
+👉 Greedy Interval Merging
+
+Sort balloons by starting position.
+
+If current balloon overlaps with the previous one → merge (keep the tightest overlapping interval).
+
+If not overlapping → need a new arrow.
+
+Key Code Snippet (minimal):
+
+points.sort()
+count = len(points)
+prev = points[0]
+
+for curr in points[1:]:
+    if curr[0] <= prev[1]:             # overlap
+        count -= 1                     # one arrow pops both
+        prev = [curr[0], min(prev[1], curr[1])]
+    else:                              # no overlap → new arrow
+        prev = curr
+
+return count
+
+
+Patterns / Buckets:
+
+Greedy
+
+Interval problems (merge intervals, meeting rooms).
+
+Sorting-based sweep.
+
+Complexity:
+
+Time: O(n log n) (sorting dominates).
+
+Space: O(1) (if sorting is in place).
+
+✅ Quick Recall Tip:
+“Sort balloons → if overlap, merge with tighter range; else new arrow.”
