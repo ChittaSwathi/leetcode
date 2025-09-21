@@ -1,0 +1,25 @@
+135. Candy problem
+
+Problem (in plain words):
+You have n children standing in a line, each with a rating. You must give each child at least 1 candy. Children with a higher rating than their neighbors must get more candies. Minimize total candies
+
+Analogy / Story:
+🎂 Think of lining up kids for birthday cake. Each kid must get at least 1 slice. If a kid is “happier” (higher rating) than the one next to them, they should get more cake. Goal: hand out the minimum cake possible while keeping all kids happy.
+
+Core Idea (Pattern):
+👉 Greedy with 2 passes
+Left-to-right ensures: if rating[i] > rating[i-1], give candies[i] = candies[i-1] + 1.
+Right-to-left ensures: if rating[i] > rating[i+1], give candies[i] = max(candies[i], candies[i+1]+1).
+Sum all candies.
+
+✅ Quick Recall Tip:
+“Greedy birthday cake distribution — scan left, then scan right, sum up.”
+
+Complexity:
+Time: O(n)
+Space: O(n) (can optimize to O(1) with careful tricks).
+
+Patterns / Buckets:
+Greedy
+Two-pass scan (left-to-right, right-to-left)
+Neighbor dependency problems (similar to: Gas Station, Trapping Rain Water in spirit).
