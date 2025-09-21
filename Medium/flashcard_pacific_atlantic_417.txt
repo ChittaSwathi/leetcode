@@ -1,0 +1,25 @@
+🃏 Flashcard — LeetCode 417: Pacific Atlantic Water Flow
+
+Problem (plain):
+Water can flow from a cell to a neighbor if the neighbor’s height is ≤ current (i.e., water flows downhill or flat). Which cells can reach both the Pacific (top/left edges) and the Atlantic (bottom/right edges)?
+
+Key Insight:
+Instead of trying to flow down from every cell to oceans, reverse the flow:
+Start DFS/BFS from ocean borders and move uphill (to neighbors with height ≥ prev_height).
+Cells reachable from Pacific borders form set P; from Atlantic borders form set A.
+Answer = P ∩ A.
+
+Algorithm:
+Run reverse DFS/BFS from all Pacific edges → fill pacific set.
+Run reverse DFS/BFS from all Atlantic edges → fill atlantic set.
+Intersect sets.
+
+Why it works:
+Reverse traversal enforces the same constraint in the opposite direction (next_height ≥ prev_height), ensuring we only move to cells that could have sent water down to the ocean.
+
+Complexity:
+Time: O(m·n) (each cell visited at most twice).
+Space: O(m·n) for visited sets + recursion stack (or queue if BFS).
+
+One-liner recall:
+“Reverse flow from borders, intersect reachability.”
