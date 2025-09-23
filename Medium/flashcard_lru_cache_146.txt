@@ -1,0 +1,38 @@
+🃏 Flashcard — LeetCode 146: LRU Cache
+
+Problem (plain):
+Design a cache with capacity C that supports:
+get(key): return value if key exists, else -1.
+put(key, value): insert/update key. If size > C, evict least recently used (LRU).
+Both operations must be O(1).
+
+Key Insight:
+Use HashMap + Doubly Linked List:
+HashMap gives O(1) lookup from key → node.
+Doubly linked list keeps order of recency (left=LRU, right=MRU).
+On access/insert, move node to MRU end.
+If capacity exceeded, remove left.next (the LRU).
+
+Algorithm:
+Initialize with two dummy sentinels: left (LRU) and right (MRU).
+
+get(key):
+If not in map → return -1.
+Else → remove node from list, reinsert at MRU end, return value.
+
+put(key, value):
+If key exists → remove old node.
+Create node(key, value), insert at MRU end, add to map.
+If size > capacity → remove LRU node (left.next) from both list & map.
+
+Why it works:
+Doubly linked list ensures quick removal & reinsertion.
+HashMap ensures direct access to nodes.
+Eviction from LRU end guarantees least-recently-used removal.
+
+Complexity:
+Time: O(1) for both get and put.
+Space: O(C) for storing up to capacity nodes in cache.
+
+One-liner recall:
+“HashMap for lookup, DLL for order — pop LRU, push MRU.”
